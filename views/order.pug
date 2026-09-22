@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title Place an Order
+    link(rel='stylesheet', href='/style.css')
+  body
+    include partials/nav.pug
+
+    .container
+      a.btn-back(href='/') ← Back to all zones
+      h1 Place an Order
+      p.subtitle Select items and quantities to simulate an outgoing order.
+
+      if error
+        p.error= error
+
+      .form-card
+        form(method='POST', action='/order')
+          #rows
+            .order-row
+              select(name='itemId')
+                option(value='') -- Select an item --
+                each item in items
+                  option(value=item._id)= `${item.name} (${item.sku}) — ${item.quantity} in stock, ${item.zone.name}`
+              input(type='number', name='quantity', placeholder='Qty', min='1')
+              button.remove-row(type='button', title='Remove row') ×
+
+          .form-actions
+            button.btn-secondary#addRow(type='button') + Add another item
+            button(type='submit') Submit Order
+
+    script.
+      document.getElementById('addRow').addEventListener('click', () => {
+        const rows = document.getElementById('rows');
+        const newRow = rows.children[0].cloneNode(true);
+        newRow.querySelectorAll('select, input').forEach(el => el.value = '');
+        rows.appendChild(newRow);
+      });
+
+      // Remove a row when its × button is clicked, but always keep at least one row
+      document.getElementById('rows').addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-row')) {
+          const rows = document.getElementById('rows');
+          if (rows.children.length > 1) {
+            e.target.closest('.order-row').remove();
+          }
+        }
+      });

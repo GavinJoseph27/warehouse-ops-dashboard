@@ -1,0 +1,80 @@
+doctype html
+html
+  head
+    title Analytics
+    link(rel='stylesheet', href='/style.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js')
+  body
+    include partials/nav.pug
+
+    .container
+      a.btn-back(href='/') ← Back to all zones
+      h1 Warehouse Analytics
+      p.subtitle Trends across inventory, capacity, orders, and zone activity.
+
+      .card.chart-box
+        h2 Inventory by Zone
+        canvas#inventoryChart
+
+      .card.chart-box
+        h2 Capacity Utilization by Zone (%)
+        canvas#capacityChart
+
+      .card.chart-box
+        h2 Order Volume Over Time
+        canvas#orderChart
+
+      .card.chart-box
+        h2 Zone Activity (Movements Logged)
+        canvas#activityChart
+
+    script.
+      const inventoryLabels = !{JSON.stringify(inventoryByZone.map(z => z.name))};
+      const inventoryData = !{JSON.stringify(inventoryByZone.map(z => z.total))};
+
+      const capacityLabels = !{JSON.stringify(capacityByZone.map(z => z.name))};
+      const capacityData = !{JSON.stringify(capacityByZone.map(z => z.percentFull))};
+
+      const orderDates = !{JSON.stringify(orderDates)};
+      const orderCounts = !{JSON.stringify(orderCounts)};
+
+      const activityLabels = !{JSON.stringify(activityData.map(a => a.name))};
+      const activityCounts = !{JSON.stringify(activityData.map(a => a.count))};
+
+      new Chart(document.getElementById('inventoryChart'), {
+        type: 'bar',
+        data: {
+          labels: inventoryLabels,
+          datasets: [{ label: 'Units in stock', data: inventoryData, backgroundColor: '#2563eb' }],
+        },
+      });
+
+      new Chart(document.getElementById('capacityChart'), {
+        type: 'bar',
+        data: {
+          labels: capacityLabels,
+          datasets: [{
+            label: '% Full',
+            data: capacityData,
+            backgroundColor: capacityData.map(p => p >= 90 ? '#dc2626' : p <= 20 ? '#d97706' : '#16a34a'),
+          }],
+        },
+        options: { scales: { y: { max: 100 } } },
+      });
+
+      new Chart(document.getElementById('orderChart'), {
+        type: 'line',
+        data: {
+          labels: orderDates,
+          datasets: [{ label: 'Orders per day', data: orderCounts, borderColor: '#7c3aed', fill: false, tension: 0.2 }],
+        },
+      });
+
+      new Chart(document.getElementById('activityChart'), {
+        type: 'bar',
+        data: {
+          labels: activityLabels,
+          datasets: [{ label: 'Movements logged', data: activityCounts, backgroundColor: '#0d9488' }],
+        },
+        options: { indexAxis: 'y' },
+      });

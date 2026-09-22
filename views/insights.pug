@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title Warehouse Insights
+    link(rel='stylesheet', href='/style.css')
+  body
+    include partials/nav.pug
+
+    .container
+      a.btn-back(href='/') ← Back to all zones
+      h1 Warehouse Insights
+      p.subtitle= `${total} issue(s) flagged across all zones`
+
+      .section
+        h2 🔴 Overstocked Zones (#{grouped.overstock.length})
+        if grouped.overstock.length
+          each w in grouped.overstock
+            .warning.red= w.message
+        else
+          p.empty-state No overstocked zones right now.
+
+      .section
+        h2 🟡 Underutilized Zones (#{grouped.understock.length})
+        if grouped.understock.length
+          each w in grouped.understock
+            .warning.yellow= w.message
+        else
+          p.empty-state No underutilized zones right now.
+
+      .section
+        h2 ⚪ Dead Stock (#{grouped.dead_stock.length})
+        if grouped.dead_stock.length
+          each w in grouped.dead_stock
+            .warning.gray= w.message
+        else
+          p.empty-state No dead stock detected.
+
+      .section
+        h2 🟠 Slotting Mismatches (#{grouped.slotting_mismatch.length})
+        if grouped.slotting_mismatch.length
+          each w in grouped.slotting_mismatch
+            .warning.orange= w.message
+        else
+          p.empty-state No slotting mismatches detected.

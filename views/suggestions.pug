@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Reorganization Suggestions
+    link(rel='stylesheet', href='/style.css')
+  body
+    include partials/nav.pug
+
+    .container
+      a.btn-back(href='/') ← Back to all zones
+      h1 Suggested Reorganization
+      p.subtitle= `${suggestions.length} suggestion(s) generated`
+
+      if suggestions.length
+        each s in suggestions
+          .suggestion(class=s.type)= s.message
+      else
+        p.empty-state No reorganization suggestions right now — everything looks balanced.

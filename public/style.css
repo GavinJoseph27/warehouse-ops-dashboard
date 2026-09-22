@@ -1,0 +1,315 @@
+/* public/style.css
+   Shared design system for the Warehouse Ops Dashboard.
+   Uses CSS variables so colors stay consistent across every page. */
+
+   :root {
+    --bg: #f4f6f8;
+    --card-bg: #ffffff;
+    --text: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0 0 60px;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  
+  /* --- Top nav bar --- */
+  .navbar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  
+  .navbar .brand {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  
+  .navbar nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .navbar nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  
+  .navbar nav a:hover {
+    background: #eef2ff;
+    color: var(--primary);
+  }
+  
+  /* --- Page headers --- */
+  h1 { font-size: 26px; margin-bottom: 4px; }
+  h2 { font-size: 18px; margin-top: 0; }
+  .subtitle { color: var(--text-muted); margin-top: 0; margin-bottom: 28px; }
+  
+  .back-link {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .back-link:hover { color: var(--primary); }
+  
+  /* --- Zone grid (homepage) --- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+  }
+  
+  .zone-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: box-shadow 0.15s, transform 0.15s;
+    display: block;
+  }
+  .zone-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .zone-card h3 { margin: 0 0 8px; font-size: 16px; }
+  .zone-card p { margin: 4px 0; font-size: 13px; color: var(--text-muted); }
+  
+  .bar-bg {
+    background: #e5e7eb;
+    border-radius: 4px;
+    height: 8px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .bar-fill { height: 8px; border-radius: 4px; transition: width 0.3s; }
+  .over { background: var(--danger); }
+  .normal { background: var(--success); }
+  .under { background: var(--warning); }
+  
+  /* --- Insights page --- */
+  .section { margin-top: 28px; }
+  .warning {
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .warning.high { border-left-color: var(--danger); }
+  .warning.medium { border-left-color: var(--warning); }
+  .warning.low { border-left-color: var(--primary); }
+  .empty-state { color: var(--text-muted); font-size: 14px; font-style: italic; }
+  
+  /* --- Suggestions page --- */
+  .suggestion {
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    font-size: 14px;
+  }
+  .suggestion.rebalance { border-left-color: var(--success); }
+  .suggestion.slotting { border-left-color: var(--warning); }
+  
+  /* --- Zone detail table --- */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  th { background: #f9fafb; color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.03em; }
+  tr:hover td { background: #f9fafb; }
+  
+  /* --- Buttons / forms --- */
+  button, .btn {
+    padding: 10px 18px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+  }
+  button:hover, .btn:hover { background: var(--primary-hover); }
+  .btn-secondary { background: #f3f4f6; color: var(--text); }
+  .btn-secondary:hover { background: #e5e7eb; }
+  
+  /* --- Back button (styled like a real button, not a bare link) --- */
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.15s, background 0.15s;
+  }
+  .btn-back:hover { background: #f3f4f6; box-shadow: var(--shadow); }
+  
+  /* --- Order form --- */
+  .form-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    max-width: 700px;
+  }
+  
+  .order-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .order-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  
+  .order-row select, .order-row input {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  .order-row select { flex: 3; }
+  .order-row input { flex: 1; width: 90px; }
+  .order-row select:focus, .order-row input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+  
+  .remove-row {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  .remove-row:hover { color: var(--danger); }
+  
+  .form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    align-items: center;
+  }
+  
+  /* --- Confirmation page --- */
+  .confirm-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--success);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+    box-shadow: var(--shadow);
+  }
+  .confirm-card .icon { font-size: 40px; margin-bottom: 8px; }
+  .confirm-card h1 { margin-bottom: 4px; }
+  .confirm-card p { color: var(--text-muted); margin: 4px 0; }
+  
+  /* --- Analytics chart cards --- */
+  .chart-box { max-width: 700px; margin-bottom: 28px; }
+  .chart-box h2 { margin-bottom: 16px; }
+  
+  /* --- Insights warning colors, matched to their emoji labels --- */
+  .warning.red { border-left-color: var(--danger); }
+  .warning.yellow { border-left-color: #eab308; }
+  .warning.gray { border-left-color: #9ca3af; }
+  .warning.orange { border-left-color: var(--warning); }
+  
+  /* --- Zone detail page: category & demand badges --- */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge-category { background: #eef2ff; color: #4338ca; }
+  
+  .demand-badge { font-weight: 600; }
+  .demand-high { color: var(--danger); }
+  .demand-medium { color: var(--warning); }
+  .demand-low { color: var(--text-muted); }
+  
+  .zone-meta {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .zone-meta .stat {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .zone-meta .stat strong { color: var(--text); font-size: 15px; display: block; }

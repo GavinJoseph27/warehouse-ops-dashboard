@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Order Confirmed
+    link(rel='stylesheet', href='/style.css')
+  body
+    include partials/nav.pug
+
+    .container
+      a.btn-back(href='/') ← Back to all zones
+
+      .confirm-card
+        .icon ✅
+        h1 Order Fulfilled
+        p Order ID: #{order.orderId}
+        p= `${order.items.length} line item(s) processed`
+        br
+        a.btn(href='/order') Place another order

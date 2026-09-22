@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title= zone.name
+    link(rel='stylesheet', href='/style.css')
+  body
+    include partials/nav.pug
+
+    .container
+      a.btn-back(href='/') ← Back to all zones
+      h1= zone.name
+
+      .zone-meta
+        .stat
+          | Capacity
+          strong= `${zone.capacity} units`
+        .stat
+          | Distance from dock
+          strong= `${zone.distanceFromDock}m`
+        .stat
+          | SKUs stored
+          strong= items.length
+
+      .card
+        table
+          thead
+            tr
+              th SKU
+              th Name
+              th Category
+              th Quantity
+              th Demand Score
+              th Last Moved
+          tbody
+            each item in items
+              - var demandClass = item.demandScore >= 70 ? 'demand-high' : (item.demandScore >= 40 ? 'demand-medium' : 'demand-low')
+              tr
+                td= item.sku
+                td= item.name
+                td
+                  span.badge.badge-category= item.category
+                td= item.quantity
+                td
+                  span.demand-badge(class=demandClass)= item.demandScore
+                td= item.lastMovedAt.toDateString()
