@@ -1,6 +1,6 @@
 # Warehouse Ops Dashboard
 
-A full-stack warehouse management tool that visualizes inventory across zones, flags operational inefficiencies, and suggests concrete reorganization moves. This was inspired by my co-op as an Assistant Logistics Engineer at DSV, which got me interested in warehouse operations..
+A full-stack warehouse management tool that visualizes inventory across zones, flags operational inefficiencies, and suggests concrete reorganization moves. This was inspired by my co-op as an Assistant Logistics Engineer at DSV, which got me interested in warehouse operations.
 
 **Live demo:** https://warehouse-ops-dashboard.onrender.com
 *(the app may take 30-60 seconds to wake up if it's been unactive)*
