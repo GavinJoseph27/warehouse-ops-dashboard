@@ -15,7 +15,7 @@ A full-stack warehouse management tool that visualizes inventory across zones, f
 
 ## Why I built this
 
-During my co-op at DSV, I worked on automating warehouse reporting and built a script that extracted raw location data to generate a visual map of the facility. This project extends that idea into a standalone, portfolio-ready application: a warehouse operations tool that goes beyond visualization into actually reasoning about the data and recommending fixes.
+My co-op at DSV as an Assistant Logistics Engineer got me interested in warehouse operations, so on my own time I decided to build something in that space. The result flags problems like overstocked zones and dead stock, then suggests specific moves to fix them.
 
 ## Tech stack
 
@@ -39,10 +39,10 @@ Scans all zones and items and flags four categories of problems:
 - **Slotting mismatches** — high-demand items stored far from the dock
 
 ### Reorganization suggestions
-Rather than relying on fixed thresholds (which can fail to produce useful output depending on the exact data), the suggestion engine works **relatively**: it always compares the fullest zones against the emptiest zones, and the farthest high-demand items against the closest available zones — guaranteeing useful suggestions regardless of the specific numbers in play.
+Instead of relying on fixed thresholds (which can fall flat depending on the exact data), the suggestion engine works relatively: it always compares the fullest zones against the emptiest ones, and the farthest high-demand items against the closest available zones. That way it keeps generating useful suggestions no matter what the numbers actually look like.
 
 ### Order simulation
-Built with concurrency safety in mind: stock deductions use an atomic MongoDB `findOneAndUpdate` with a quantity guard, preventing two simultaneous orders from both succeeding and overselling the same item.
+Built with concurrency in mind: stock deductions use an atomic MongoDB `findOneAndUpdate` with a quantity guard, so two orders coming in at the same time can't both succeed and oversell the same item.
 
 ## Running it locally
 
