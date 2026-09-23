@@ -3,7 +3,7 @@
 A full-stack warehouse management tool that visualizes inventory across zones, flags operational inefficiencies, and suggests concrete reorganization moves. This was inspired by real logistics work from my co-op as an Assistant Logistics Engineer at DSV.
 
 **Live demo:** https://warehouse-ops-dashboard.onrender.com
-*(hosted on Render's free tier — the app may take 30-60 seconds to wake up if it's been idle)*
+*(the app may take 30-60 seconds to wake up if it's been unactive)*
 
 ## What it does
 
