@@ -1,6 +1,6 @@
 # Warehouse Ops Dashboard
 
-A full-stack warehouse management tool that visualizes inventory across zones, flags operational inefficiencies, and suggests concrete reorganization moves — inspired by real logistics work from my co-op as an Assistant Logistics Engineer at DSV.
+A full-stack warehouse management tool that visualizes inventory across zones, flags operational inefficiencies, and suggests concrete reorganization moves. This was inspired by real logistics work from my co-op as an Assistant Logistics Engineer at DSV.
 
 **Live demo:** https://warehouse-ops-dashboard.onrender.com
 *(hosted on Render's free tier — the app may take 30-60 seconds to wake up if it's been idle)*
@@ -27,7 +27,7 @@ During my co-op at DSV, I worked on automating warehouse reporting and built a s
 
 ## A note on the data
 
-All inventory, order, and zone data in this app is **synthetically generated** using Faker.js — there is no real DSV data here, for obvious confidentiality reasons. The seed script (`seed.js`) creates 12 zones, 300 items, and 100 orders, with zone capacities deliberately calibrated so that fill levels land in a realistic 15-95% range rather than random, implausible numbers.
+All inventory, order, and zone data in this app is **synthetically generated** using Faker.js. The seed script (`seed.js`) creates 12 zones, 300 items, and 100 orders, with zone capacities deliberately calibrated so that fill levels land in a realistic 15-95% range rather than random, implausible numbers.
 
 ## Features in detail
 
