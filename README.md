@@ -78,13 +78,6 @@ Then visit `http://localhost:3000`.
 └── server.js        # Express app and routes
 ```
 
-## What I'd add next
-
-- Real historical data patterns (seasonal demand, weekday/weekend order trends)
-- A more sophisticated reorganization algorithm (currently rule-based/greedy, not optimization-based)
-- User authentication for multi-warehouse support
-- Export insights/suggestions as a downloadable report
-
 ---
 
 Built by [Gavin Joseph](https://github.com/GavinJoseph27) — [LinkedIn](https://linkedin.com/in/gavin-joseph-062712gj)
